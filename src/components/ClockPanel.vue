@@ -28,12 +28,13 @@ import useCountdown from '@/hooks/useCountdown'
 import { useModeStore } from '@/stores/mode'
 import { timer } from '@/utlis/timer'
 
-const { startCountdown, stopCountdown, localSecond } = useCountdown()
+const { startCountdown, stopCountdown, localSecond, stopCountdownNResetTime } =
+  useCountdown()
 
 const mode = useModeStore()
-// function from store
+
 const { switchMode, toggleTimerActive, stopTimer } = useModeStore()
-// ref var from store
+
 const { prompt, isTimerActive } = storeToRefs(mode)
 const panelList = Object.values(PANEL_TYPE)
 
@@ -42,7 +43,7 @@ const handleModeSwitch = (mode) => {
   const onModeSwitch = () => {
     switchMode(mode)
     stopTimer()
-    stopCountdown()
+    stopCountdownNResetTime()
   }
 
   if (isTimerActive.value) {

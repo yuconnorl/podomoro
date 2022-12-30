@@ -7,7 +7,6 @@ const useCountdown = () => {
   const localSecond = ref(mode.second)
   const intervalID = ref('')
 
-  // count down start
   const startCountdown = () => {
     intervalID.value = setInterval(() => {
       console.log(localSecond.value)
@@ -15,8 +14,11 @@ const useCountdown = () => {
     }, 1000)
   }
 
-  // count down stop
   const stopCountdown = () => {
+    clearInterval(intervalID.value)
+  }
+
+  const stopCountdownNResetTime = () => {
     clearInterval(intervalID.value)
     localSecond.value = mode.second
   }
@@ -25,6 +27,7 @@ const useCountdown = () => {
     localSecond,
     startCountdown,
     stopCountdown,
+    stopCountdownNResetTime,
   }
 }
 
